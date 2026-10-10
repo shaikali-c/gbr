@@ -1,26 +1,210 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-brand: var(--c-brand);
+  --color-accent: var(--c-accent);
+  --color-on-brand: var(--c-on-brand);
+  --font-display: var(--f-display);
+  --font-body: var(--f-body);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* GBR (parent company) - forest green, turmeric accent, cool off-white. */
+:root {
+  --f-display: var(--font-familjen);
+  --f-body: var(--font-archivo);
+
+  --c-canvas: #f4f6f2;
+  --c-surface: #ffffff;
+  --c-ink: #10170f;
+  --c-muted: #55604f;
+  --c-line: #dbe0d6;
+  --c-brand: #123a2b;
+  --c-accent: #e8a317;
+  --c-on-brand: #ffffff;
+}
+
+/* SOL Cafe - solar orange, sun yellow, paper white. Scoped to .sol. */
+.sol {
+  --f-display: var(--font-bricolage);
+
+  --c-canvas: #fffdf5;
+  --c-surface: #ffffff;
+  --c-ink: #241409;
+  --c-muted: #6b5a4d;
+  --c-line: #efe5d5;
+  --c-brand: #cf3a0a;
+  --c-accent: #ffc23d;
+  --c-on-brand: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --c-canvas: #0d120e;
+    --c-surface: #151c16;
+    --c-ink: #e9ede7;
+    --c-muted: #9daa99;
+    --c-line: #2a342b;
+    --c-brand: #1f6b47;
+    --c-accent: #f0b429;
+    --c-on-brand: #ffffff;
+  }
+
+  .sol {
+    --c-canvas: #17100b;
+    --c-surface: #201710;
+    --c-ink: #f4ece3;
+    --c-muted: #ab9c8e;
+    --c-line: #35271e;
+    --c-accent: #ffc23d;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--c-canvas);
+  color: var(--c-ink);
+  font-family: var(--f-body), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* One radius system for the whole project: pill for controls, 2xl for media. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--f-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.btn-primary {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--c-brand) 86%, black);
+}
+
+.btn-secondary {
+  border: 1px solid var(--c-ink);
+  color: var(--c-ink);
+}
+
+.btn-secondary:hover {
+  background: var(--c-ink);
+  color: var(--c-canvas);
+}
+
+/* Fixed ink so the amber/sun buttons stay legible in both colour schemes. */
+.btn-accent {
+  background: var(--c-accent);
+  color: #1a1200;
+}
+
+.btn-accent:hover {
+  background: color-mix(in srgb, var(--c-accent) 88%, black);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes zoomin {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.zoomin {
+  animation: zoomin 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll reveals: hidden until the Reveal client component adds .is-in.
+   The <noscript> style in layout.tsx forces visibility when JS is off. */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
