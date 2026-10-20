@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Design tokens
+
+   Two brand scopes live side by side on one domain:
+   - GBR (parent company): roasted brown, burnt orange, gold on warm cream.
+   - SOL Café: espresso on cream with olive, sun gold and terracotta.
+     Scoped to `.sol`, so the café experience never leaks into GBR pages.
+
+   Every colour used in the site should come from this table. Page components
+   reference semantic names (bg-canvas, text-muted, border-line, btn-primary…)
+   so a palette change never requires touching a page.
+--------------------------------------------------------------------------- */
 @theme inline {
   --color-canvas: var(--c-canvas);
   --color-surface: var(--c-surface);
@@ -8,60 +20,40 @@
   --color-line: var(--c-line);
   --color-brand: var(--c-brand);
   --color-accent: var(--c-accent);
+  --color-gold: var(--c-gold);
+  --color-terracotta: var(--c-terracotta);
   --color-on-brand: var(--c-on-brand);
-  --font-display: var(--f-display);
-  --font-body: var(--f-body);
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif;
+  --font-accent: var(--font-cormorant), Georgia, serif;
 }
 
-/* GBR (parent company) - forest green, turmeric accent, cool off-white. */
 :root {
-  --f-display: var(--font-familjen);
-  --f-body: var(--font-archivo);
-
-  --c-canvas: #f4f6f2;
+  --c-canvas: #faf5ec;
   --c-surface: #ffffff;
-  --c-ink: #10170f;
-  --c-muted: #55604f;
-  --c-line: #dbe0d6;
-  --c-brand: #123a2b;
-  --c-accent: #e8a317;
-  --c-on-brand: #ffffff;
+  --c-ink: #281a0f;
+  --c-muted: #6b5847;
+  --c-line: #e8dbc6;
+  --c-brand: #43270f;
+  --c-accent: #b4531b;
+  --c-gold: #8a6415;
+  --c-terracotta: #9c4517;
+  --c-on-brand: #fdf8ee;
 }
 
-/* SOL Cafe - solar orange, sun yellow, paper white. Scoped to .sol. */
+/* SOL Café — cream, espresso, olive, sun gold, terracotta. */
 .sol {
-  --f-display: var(--font-bricolage);
-
-  --c-canvas: #fffdf5;
-  --c-surface: #ffffff;
-  --c-ink: #241409;
-  --c-muted: #6b5a4d;
-  --c-line: #efe5d5;
-  --c-brand: #cf3a0a;
-  --c-accent: #ffc23d;
-  --c-on-brand: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --c-canvas: #0d120e;
-    --c-surface: #151c16;
-    --c-ink: #e9ede7;
-    --c-muted: #9daa99;
-    --c-line: #2a342b;
-    --c-brand: #1f6b47;
-    --c-accent: #f0b429;
-    --c-on-brand: #ffffff;
-  }
-
-  .sol {
-    --c-canvas: #17100b;
-    --c-surface: #201710;
-    --c-ink: #f4ece3;
-    --c-muted: #ab9c8e;
-    --c-line: #35271e;
-    --c-accent: #ffc23d;
-  }
+  --c-canvas: #f8f1e1;
+  --c-surface: #fffcf3;
+  --c-ink: #2b1d11;
+  --c-muted: #6e5c48;
+  --c-line: #e6d9be;
+  --c-brand: #4d5730;
+  --c-accent: #dd9f2c;
+  --c-gold: #8a6415;
+  --c-terracotta: #ac4f29;
+  --c-on-brand: #fbf7ea;
 }
 
 html {
@@ -72,14 +64,19 @@ html {
 body {
   background: var(--c-canvas);
   color: var(--c-ink);
-  font-family: var(--f-body), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--f-body), var(--font-body);
   font-synthesis-weight: none;
   text-rendering: optimizeLegibility;
 }
 
+::selection {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
 h1,
 h2 {
-  font-weight: 700;
+  font-weight: 600;
   text-wrap: balance;
 }
 
@@ -88,23 +85,24 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--c-brand);
+  outline: 2px solid var(--c-accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* One radius system for the whole project: pill for controls, 2xl for media. */
+/* --- Controls -------------------------------------------------------------- */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   border-radius: 999px;
-  padding: 0.75rem 1.5rem;
-  font-family: var(--f-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.9375rem;
+  padding: 0.8rem 1.6rem;
+  font-family: var(--f-body), var(--font-body);
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
   line-height: 1;
   white-space: nowrap;
   transition:
@@ -124,28 +122,57 @@ h3 {
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--c-brand) 86%, black);
+  background: color-mix(in srgb, var(--c-brand) 84%, black);
 }
 
 .btn-secondary {
-  border: 1px solid var(--c-ink);
+  border: 1px solid color-mix(in srgb, var(--c-ink) 55%, transparent);
   color: var(--c-ink);
 }
 
 .btn-secondary:hover {
+  border-color: var(--c-ink);
   background: var(--c-ink);
   color: var(--c-canvas);
 }
 
-/* Fixed ink so the amber/sun buttons stay legible in both colour schemes. */
 .btn-accent {
   background: var(--c-accent);
-  color: #1a1200;
+  color: #241505;
 }
 
 .btn-accent:hover {
-  background: color-mix(in srgb, var(--c-accent) 88%, black);
+  background: color-mix(in srgb, var(--c-accent) 86%, black);
 }
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Typography helpers ---------------------------------------------------- */
+
+/* Editorial italic accent, set in Cormorant Garamond. */
+.italic-accent {
+  font-family: var(--f-accent), var(--font-accent);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.eyebrow {
+  font-family: var(--f-body), var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.sol .eyebrow {
+  color: var(--c-terracotta);
+}
+
+/* --- Motion ---------------------------------------------------------------- */
 
 @keyframes rise {
   from {

@@ -1,276 +1,385 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, MapPin } from "lucide-react";
+import { Reveal } from "@/components/reveal";
+import { SolHeader } from "@/components/sol/sol-header";
+import { SolFooter } from "@/components/sol/sol-footer";
+import { SolMenu } from "@/components/sol/sol-menu";
+import { EmptyState, PromoSlot } from "@/components/ui";
+import { activePromo } from "@/content/promos";
+import { site } from "@/content/site";
+import { solContent } from "@/content/sol";
 
 export const metadata: Metadata = {
-  title: "SOL Café",
+  title: {
+    absolute: "SOL Café | Coffee, Food & Fresh Drinks in Hyderabad",
+  },
   description:
-    "SOL Café is the consumer café brand under Gundu Babu Ruchulu: filter coffee, breakfast, small plates and bakery in Hyderabad.",
+    "SOL Café is a contemporary neighbourhood café by Gundu Babu Ruchulu at Prestige Tranquil, Kokapet, Hyderabad — good coffee, wholesome food, fresh drinks and community moments.",
+  alternates: { canonical: "/sol-cafe" },
+  openGraph: {
+    title: "SOL Café | Coffee, Food & Fresh Drinks in Hyderabad",
+    description:
+      "Good coffee, wholesome food, fresh drinks and a place to slow down, connect and enjoy.",
+    url: "/sol-cafe",
+    images: [{ url: "/images/sol/interior-counter.jpg" }],
+  },
 };
-
-type MenuItem = {
-  title: string;
-  desc: string;
-  span: string;
-  image?: string;
-  alt?: string;
-  ratio?: string;
-  tone?: "brand" | "accent" | "surface";
-};
-
-const menu: MenuItem[] = [
-  {
-    title: "Coffee",
-    desc: "Filter, espresso and cold brew, pulled to order.",
-    image: "/sol-coffee.jpg",
-    alt: "A latte in a ceramic cup on a wooden café table",
-    span: "md:col-span-7",
-    ratio: "aspect-[16/10]",
-  },
-  {
-    title: "Breakfast",
-    desc: "Idli, dosa, upma and eggs, served in the morning.",
-    span: "md:col-span-5",
-    tone: "brand",
-  },
-  {
-    title: "Small plates",
-    desc: "Salted snacks and quick bites for any hour.",
-    span: "md:col-span-5",
-    tone: "accent",
-  },
-  {
-    title: "Bakery",
-    desc: "Cakes, cookies and savouries, baked through the day.",
-    image: "/sol-bakery.jpg",
-    alt: "Pastries and breads arranged behind a bakery display case",
-    span: "md:col-span-7",
-    ratio: "aspect-[16/9]",
-  },
-];
-
-const details = [
-  { label: "Location", value: "Hyderabad, Telangana" },
-  { label: "Address", value: "To be announced" },
-  { label: "Opening hours", value: "To be announced" },
-];
 
 export default function SolCafePage() {
   return (
     <div className="sol flex min-h-screen flex-col bg-canvas text-ink">
-      <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-          <Link
-            href="/sol-cafe"
-            className="font-display text-lg font-bold tracking-tight text-ink"
-          >
-            SOL
-            <span className="ml-2 hidden font-normal text-muted sm:inline">
-              Café
-            </span>
-          </Link>
-
-          <nav className="flex items-center gap-5 text-sm sm:gap-7">
-            <a
-              href="#menu"
-              className="hidden text-muted transition-colors hover:text-ink sm:block"
-            >
-              Menu
-            </a>
-            <a
-              href="#visit"
-              className="hidden text-muted transition-colors hover:text-ink sm:block"
-            >
-              Visit
-            </a>
-            <Link
-              href="/"
-              className="rounded-full border border-line px-3 py-1.5 font-semibold text-ink transition-colors hover:border-ink"
-            >
-              GBR
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SolHeader />
+      <PromoSlot banner={activePromo("sol")} />
 
       <main className="flex-1">
-        {/* Hero: oversized type on paper, full-bleed photograph below */}
-        <section className="flex min-h-[calc(100dvh_-_65px)] flex-col">
-          <div className="flex flex-1 flex-col justify-center px-4 py-14 sm:px-6 md:py-16 lg:px-8">
-            <div className="mx-auto w-full max-w-7xl">
-              <h1 className="rise font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl md:text-6xl xl:text-7xl 2xl:text-8xl">
-                Sunlight, coffee,
-                <br />
-                something to eat.
-              </h1>
-
-              <div className="mt-9 flex flex-col gap-7 md:mt-14 md:flex-row md:items-end md:justify-between md:gap-12">
-                <p
-                  className="rise max-w-[46ch] text-base leading-relaxed text-muted md:text-lg"
-                  style={{ animationDelay: "90ms" }}
-                >
-                  Filter coffee, breakfast, small plates and bakery, from the
-                  kitchens behind GBR in Hyderabad.
-                </p>
-                <div
-                  className="rise shrink-0"
-                  style={{ animationDelay: "180ms" }}
-                >
-                  <a href="#menu" className="btn btn-primary">
-                    See the menu
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative h-[46vh] min-h-[260px] w-full shrink-0 overflow-hidden">
+        {/* Hero: warm full-bleed interior with a cream statement panel */}
+        <section className="relative">
+          <div className="relative h-[72vh] max-h-[720px] min-h-[480px] w-full">
             <Image
-              src="/sol-cafe.jpg"
-              alt="The interior of SOL Café with terracotta walls, a long counter and hanging lamps"
+              src="/images/sol/interior-counter.jpg"
+              alt="The warm interior of SOL Café with a long counter, terracotta walls and hanging lamps"
               fill
-              preload
+              priority
               sizes="100vw"
               className="zoomin object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/40 to-ink/15" />
+            <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-4 pb-12 sm:px-6 md:pb-16 lg:px-8">
+              <p className="rise text-xs font-semibold uppercase tracking-[0.24em] text-on-brand/80">
+                A café by {site.name}
+              </p>
+              <h1
+                className="rise mt-5 max-w-[16ch] font-display text-[2.6rem] leading-[1.04] tracking-tight text-white sm:text-6xl xl:text-7xl"
+                style={{ animationDelay: "60ms" }}
+              >
+                A Little Warmth in Your Day.
+              </h1>
+              <p
+                className="rise mt-5 max-w-[46ch] text-base leading-relaxed text-on-brand/85 md:text-lg"
+                style={{ animationDelay: "140ms" }}
+              >
+                Good coffee, wholesome food, fresh drinks and a place to slow
+                down, connect and enjoy.
+              </p>
+              <div
+                className="rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-4"
+                style={{ animationDelay: "220ms" }}
+              >
+                <a href="#menu" className="btn btn-accent">
+                  Explore SOL Café
+                </a>
+                <p className="flex items-center gap-2 text-sm text-on-brand/80">
+                  <MapPin aria-hidden="true" size={15} />
+                  {solContent.location}
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Editorial statement */}
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-          <p className="max-w-[24ch] font-display text-3xl leading-[1.18] tracking-tight sm:text-4xl md:text-5xl">
-            A café built by a food company that already runs kitchens for a
-            living.
-          </p>
-          <p className="mt-7 max-w-[60ch] text-base leading-relaxed text-muted md:text-lg">
-            SOL is where GBR cooks for walk-in guests instead of canteens. The
-            supply chain, the prep discipline and the recipes come from the same
-            place; the room, the light and the pace are entirely its own.
-          </p>
+        {/* About SOL */}
+        <section id="about" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+            <Reveal>
+              <p className="eyebrow">About SOL</p>
+              <h2 className="mt-4 max-w-[14ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                Your neighbourhood café
+              </h2>
+              <p className="mt-6 max-w-[54ch] text-base leading-relaxed text-muted md:text-lg">
+                SOL is a contemporary neighbourhood café by Gundu Babu
+                Ruchulu, created around good coffee, wholesome food, fresh
+                drinks and everyday community moments.
+              </p>
+              <p className="mt-5 max-w-[54ch] text-base leading-relaxed text-muted md:text-lg">
+                SOL is designed to be an easy part of the day - a morning
+                coffee stop, a quick breakfast, a lunch break, a post-workout
+                drink, an evening catch-up or a place to simply stay awhile.
+              </p>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[4/3] md:aspect-[4/5]">
+                <Image
+                  src="/images/sol/latte-hands.jpg"
+                  alt="Two people holding freshly made lattes across a café table"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+          </div>
         </section>
 
-        {/* Menu bento: four cells for four categories */}
-        <section id="menu" className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-24 lg:px-8">
-          <h2 className="max-w-[16ch] font-display text-3xl tracking-tight sm:text-4xl md:text-5xl">
-            What we serve
-          </h2>
+        {/* What SOL offers — editorial image grid */}
+        <section className="border-y border-line bg-surface">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="eyebrow">What SOL offers</p>
+                <h2 className="mt-4 max-w-[16ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                  Something for every part of the day
+                </h2>
+              </div>
+              <p className="italic-accent max-w-[30ch] text-xl text-muted md:text-right md:text-2xl">
+                Made fresh, served warm.
+              </p>
+            </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-12">
-            {menu.map((item) =>
-              item.image ? (
-                <div
-                  key={item.title}
-                  className={`relative overflow-hidden rounded-2xl ${item.span} ${item.ratio ?? ""}`}
+            <div className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+              {solContent.offers.map((offer, index) => (
+                <Reveal key={offer.title} delay={(index % 3) * 70}>
+                  <article className="flex h-full flex-col bg-surface">
+                    {offer.image ? (
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        <Image
+                          src={offer.image}
+                          alt={offer.alt ?? offer.title}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          className="object-cover transition-transform duration-700 hover:scale-[1.04]"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        aria-hidden="true"
+                        className="aspect-[16/10] bg-gradient-to-br from-accent/25 via-terracotta/15 to-transparent"
+                      />
+                    )}
+                    <div className="flex flex-1 flex-col p-6 md:p-7">
+                      <h3 className="font-display text-xl tracking-tight">
+                        {offer.title}
+                      </h3>
+                      <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                        {offer.description}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* The SOL experience */}
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+            <Reveal>
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/images/sol/interior-window.jpg"
+                  alt="A sunlit café seating area with wooden tables and tall windows"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <p className="eyebrow">The SOL experience</p>
+              <h2 className="mt-4 font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                More than a café.
+              </h2>
+              <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-muted md:text-lg">
+                SOL brings together everyday food and beverages with a relaxed
+                setting, community experiences and convenient options for
+                residents.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/contact?type=sol-cafe"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-terracotta transition-all hover:gap-3"
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.alt ?? item.title}
-                    fill
-                    sizes="(min-width: 768px) 60vw, 100vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
-                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                    <h3 className="font-display text-2xl tracking-tight text-white md:text-3xl">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 max-w-[40ch] text-sm leading-relaxed text-white/85 md:text-base">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+                  Ask about SOL
+                  <ArrowRight aria-hidden="true" size={15} />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Community */}
+        <section className="bg-brand text-on-brand">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 md:gap-16 md:py-28 lg:px-8">
+            <Reveal>
+              <p className="eyebrow text-accent">Community</p>
+              <h2 className="mt-4 max-w-[14ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                Made for everyday moments.
+              </h2>
+              <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-on-brand/85 md:text-lg">
+                {solContent.eventsNote}
+              </p>
+            </Reveal>
+
+            <Reveal delay={100}>
+              {solContent.events.length > 0 ? (
+                <ul className="divide-y divide-on-brand/20 border-y border-on-brand/20">
+                  {solContent.events.map((event) => (
+                    <li key={event.title} className="py-5">
+                      <p className="font-display text-lg tracking-tight">
+                        {event.title}
+                      </p>
+                      <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-on-brand/80">
+                        {event.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               ) : (
-                <div
-                  key={item.title}
-                  className={`flex min-h-[240px] flex-col justify-end rounded-2xl p-6 md:p-8 ${item.span} ${
-                    item.tone === "brand"
-                      ? "bg-brand text-on-brand"
-                      : item.tone === "accent"
-                        ? "bg-accent text-ink"
-                        : "border border-line bg-surface"
-                  }`}
-                >
-                  <h3 className="font-display text-2xl tracking-tight md:text-3xl">
-                    {item.title}
-                  </h3>
-                  <p
-                    className={`mt-2 max-w-[40ch] text-sm leading-relaxed md:text-base ${
-                      item.tone === "brand" ? "opacity-90" : ""
-                    }`}
-                  >
-                    {item.desc}
+                <div className="border border-dashed border-on-brand/30 px-6 py-10 text-center">
+                  <p className="mx-auto max-w-[42ch] text-sm leading-relaxed text-on-brand/80">
+                    Community events and celebrations will be announced here as
+                    they are scheduled. Write to us if you would like to hear
+                    about them.
                   </p>
+                  <a
+                    href={`mailto:${site.emails.general}?subject=SOL%20Caf%C3%A9%20events`}
+                    className="mt-4 inline-block text-sm font-semibold text-accent underline underline-offset-4"
+                  >
+                    {site.emails.general}
+                  </a>
                 </div>
-              ),
-            )}
+              )}
+            </Reveal>
           </div>
+        </section>
+
+        {/* Subscriptions */}
+        <section id="subscriptions" className="border-b border-line">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-12 md:gap-16 md:py-28 lg:px-8">
+            <div className="md:col-span-5">
+              <p className="eyebrow">Subscriptions</p>
+              <h2 className="mt-4 max-w-[14ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                Regulars, made effortless
+              </h2>
+              <p className="mt-6 max-w-[50ch] text-base leading-relaxed text-muted md:text-lg">
+                {solContent.subscriptionsNote}
+              </p>
+            </div>
+
+            <div className="md:col-span-6 md:col-start-7">
+              {solContent.subscriptions.length > 0 ? (
+                <ul className="divide-y divide-line border-y border-line">
+                  {solContent.subscriptions.map((sub) => (
+                    <li key={sub.title} className="py-5">
+                      <p className="font-display text-lg tracking-tight">
+                        {sub.title}
+                      </p>
+                      <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted">
+                        {sub.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <EmptyState note="Current subscription plans are being finalised. Ask us about juice, shake and meal subscriptions and we will share the latest options.">
+                  <Link href="/contact?type=sol-cafe" className="text-sm font-semibold text-terracotta underline underline-offset-4 transition-colors hover:text-ink">
+                    Enquire about subscriptions
+                  </Link>
+                </EmptyState>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Weekend specials */}
+        <section className="border-b border-line bg-surface">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-12 md:gap-16 md:py-28 lg:px-8">
+            <div className="md:col-span-5">
+              <p className="eyebrow">Weekend specials</p>
+              <h2 className="mt-4 max-w-[16ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                Something special, for a short while
+              </h2>
+              <p className="mt-6 max-w-[50ch] text-base leading-relaxed text-muted md:text-lg">
+                {solContent.specialsNote}
+              </p>
+            </div>
+
+            <div className="md:col-span-6 md:col-start-7">
+              {solContent.specials.length > 0 ? (
+                <ul className="divide-y divide-line border-y border-line">
+                  {solContent.specials.map((special) => (
+                    <li key={special.title} className="py-5">
+                      <p className="font-display text-lg tracking-tight">
+                        {special.title}
+                      </p>
+                      <p className="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted">
+                        {special.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <EmptyState note="There are no specials published right now. Weekend and festival offerings will be listed here when they are announced.">
+                  <Link href="/contact?type=sol-cafe" className="text-sm font-semibold text-terracotta underline underline-offset-4 transition-colors hover:text-ink">
+                    Ask about upcoming specials
+                  </Link>
+                </EmptyState>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Menu */}
+        <section id="menu" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow">Menu</p>
+              <h2 className="mt-4 max-w-[16ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                What&apos;s cooking
+              </h2>
+            </div>
+            <p className="italic-accent max-w-[30ch] text-xl text-muted md:text-right md:text-2xl">
+              The menu changes with the season.
+            </p>
+          </div>
+
+          <SolMenu />
         </section>
 
         {/* Visit */}
-        <section id="visit" className="border-t border-line">
-          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-12 md:py-24 lg:px-8">
-            <div className="md:col-span-6">
-              <h2 className="max-w-[12ch] font-display text-3xl tracking-tight sm:text-4xl md:text-5xl">
-                Come sit down
+        <section id="visit" className="border-t border-line bg-brand text-on-brand">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:gap-16 md:py-24 lg:px-8">
+            <div>
+              <h2 className="max-w-[14ch] font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+                Come sit awhile.
               </h2>
-              <p className="mt-5 max-w-[50ch] text-base leading-relaxed text-muted md:text-lg">
-                Full address and opening hours will be listed here once the
-                first SOL Café doors are open. Until then, SOL is part of the
-                GBR group you can reach through the main site.
+              <p className="mt-6 max-w-[50ch] text-base leading-relaxed text-on-brand/85 md:text-lg">
+                Find SOL at {solContent.location}. For anything you would like
+                to know before you visit, write to us - we would love to hear
+                from you.
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="mailto:hello@gundubaburuchulu.com"
-                  className="btn btn-primary"
-                >
-                  Ask about SOL
-                </a>
-                <Link href="/" className="btn btn-secondary">
-                  Back to GBR
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact?type=sol-cafe" className="btn btn-accent">
+                  Enquire about SOL
                 </Link>
               </div>
             </div>
 
-            <div className="md:col-span-5 md:col-start-8">
-              <dl className="grid gap-5">
-                {details.map((row) => (
-                  <div key={row.label} className="border-t border-line pt-4">
-                    <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                      {row.label}
-                    </dt>
-                    <dd className="mt-1.5 font-display text-lg tracking-tight">
-                      {row.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+            <div className="flex flex-col justify-center gap-4 text-on-brand/85">
+              <p className="flex items-center gap-3">
+                <MapPin aria-hidden="true" size={17} className="shrink-0 text-accent" />
+                {solContent.location}
+              </p>
+              <a
+                href={`mailto:${site.emails.general}`}
+                className="flex items-center gap-3 transition-colors hover:text-on-brand"
+              >
+                <span aria-hidden="true" className="w-[17px] shrink-0 text-center text-accent">@</span>
+                {site.emails.general}
+              </a>
+              <p className="italic-accent mt-4 text-xl text-on-brand/70">
+                {site.sol.relation}
+              </p>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-          <p className="font-display text-base tracking-tight">
-            SOL Café
-            <span className="ml-2 font-normal text-muted">
-              A company under Gundu Babu Ruchulu
-            </span>
-          </p>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <a href="#menu" className="text-muted hover:text-ink">
-              Menu
-            </a>
-            <a href="#visit" className="text-muted hover:text-ink">
-              Visit
-            </a>
-            <Link href="/" className="text-muted hover:text-ink">
-              gundubaburuchulu.com
-            </Link>
-          </nav>
-          <p className="text-sm text-muted">© 2026 SOL Café, Hyderabad</p>
-        </div>
-      </footer>
+      <SolFooter />
     </div>
   );
 }
