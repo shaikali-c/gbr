@@ -24,20 +24,8 @@ export const metadata: Metadata = {
 const contactRows = [
   {
     label: "General enquiries",
-    value: site.emails.general,
-    href: `mailto:${site.emails.general}`,
-    icon: Mail,
-  },
-  {
-    label: "Director",
-    value: site.emails.director,
-    href: `mailto:${site.emails.director}`,
-    icon: Mail,
-  },
-  {
-    label: "Management / office",
-    value: site.emails.office,
-    href: `mailto:${site.emails.office}`,
+    value: site.email,
+    href: `mailto:${site.email}`,
     icon: Mail,
   },
   ...site.phones.map((phone) => ({

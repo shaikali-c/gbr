@@ -48,25 +48,11 @@ export function SiteFooter() {
               {site.location}
             </p>
             <a
-              href={`mailto:${site.emails.general}`}
+              href={`mailto:${site.email}`}
               className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
             >
               <Mail aria-hidden="true" size={15} className="shrink-0" />
-              {site.emails.general}
-            </a>
-            <a
-              href={`mailto:${site.emails.director}`}
-              className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
-            >
-              <Mail aria-hidden="true" size={15} className="shrink-0" />
-              {site.emails.director}
-            </a>
-            <a
-              href={`mailto:${site.emails.office}`}
-              className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
-            >
-              <Mail aria-hidden="true" size={15} className="shrink-0" />
-              {site.emails.office}
+              {site.email}
             </a>
             {site.phones.map((phone) => (
               <a

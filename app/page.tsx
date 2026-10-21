@@ -33,7 +33,7 @@ const organizationJsonLd = {
   name: site.name,
   alternateName: site.shortName,
   url: site.domain,
-  email: site.emails.general,
+  email: site.email,
   telephone: site.phones[0].href.replace("tel:", ""),
   sameAs: [site.socials.instagram.url, site.sol.socials.instagram.url],
   slogan: site.tagline,

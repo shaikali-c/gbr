@@ -237,10 +237,10 @@ export default function SolCafePage() {
                     about them.
                   </p>
                   <a
-                    href={`mailto:${site.emails.general}?subject=SOL%20Caf%C3%A9%20events`}
+                    href={`mailto:${site.email}?subject=SOL%20Caf%C3%A9%20events`}
                     className="mt-4 inline-block text-sm font-semibold text-accent underline underline-offset-4"
                   >
-                    {site.emails.general}
+                    {site.email}
                   </a>
                 </div>
               )}
@@ -366,11 +366,11 @@ export default function SolCafePage() {
                 {solContent.location}
               </p>
               <a
-                href={`mailto:${site.emails.general}`}
+                href={`mailto:${site.email}`}
                 className="flex items-center gap-3 transition-colors hover:text-on-brand"
               >
                 <span aria-hidden="true" className="w-[17px] shrink-0 text-center text-accent">@</span>
-                {site.emails.general}
+                {site.email}
               </a>
               {site.phones.map((phone) => (
                 <a

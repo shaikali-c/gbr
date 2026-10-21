@@ -12,11 +12,7 @@ export const site = {
   tagline: "Food. Hospitality. Experiences.",
   domain: "https://gundubaburuchulu.com",
   location: "Hyderabad, Telangana, India",
-  emails: {
-    general: "info@gundubaburuchulu.com",
-    director: "director@gundubaburuchulu.com",
-    office: "office@gundubaburuchulu.com",
-  },
+  email: "info@gundubaburuchulu.com",
   phones: [
     { label: "Primary", display: "+91 72076 78950", href: "tel:+917207678950" },
     {

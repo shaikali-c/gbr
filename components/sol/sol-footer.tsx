@@ -51,22 +51,10 @@ export function SolFooter() {
           <div className="flex flex-col gap-2.5 text-sm text-on-brand/70">
             <p>{site.sol.location}</p>
             <a
-              href={`mailto:${site.emails.general}`}
+              href={`mailto:${site.email}`}
               className="transition-colors hover:text-on-brand"
             >
-              {site.emails.general}
-            </a>
-            <a
-              href={`mailto:${site.emails.director}`}
-              className="transition-colors hover:text-on-brand"
-            >
-              {site.emails.director}
-            </a>
-            <a
-              href={`mailto:${site.emails.office}`}
-              className="transition-colors hover:text-on-brand"
-            >
-              {site.emails.office}
+              {site.email}
             </a>
             {site.phones.map((phone) => (
               <a

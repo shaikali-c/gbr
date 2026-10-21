@@ -103,7 +103,7 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.CONTACT_TO_EMAIL ?? site.emails.general;
+  const toEmail = process.env.CONTACT_TO_EMAIL ?? site.email;
   const fromEmail =
     process.env.CONTACT_FROM_EMAIL ?? "onboarding@resend.dev";
 

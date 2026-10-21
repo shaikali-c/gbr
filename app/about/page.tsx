@@ -100,12 +100,13 @@ export default function AboutPage() {
                 {founderStory.title}
               </h2>
               <div className="mt-8 flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-accent/40 font-display text-xl text-brand"
-                >
-                  S
-                </span>
+                <Image
+                  src="/logo/gbr.jpg"
+                  alt="Gundu Babu Ruchulu logo"
+                  width={1600}
+                  height={1600}
+                  className="h-14 w-14 shrink-0 rounded-full object-cover"
+                />
                 <p className="max-w-[20ch] text-sm leading-relaxed text-muted">
                   Srini — the Gundu Babu behind our name.
                 </p>
