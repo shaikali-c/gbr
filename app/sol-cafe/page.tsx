@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { InstagramIcon } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
 import { SolHeader } from "@/components/sol/sol-header";
 import { SolFooter } from "@/components/sol/sol-footer";
@@ -370,6 +371,25 @@ export default function SolCafePage() {
               >
                 <span aria-hidden="true" className="w-[17px] shrink-0 text-center text-accent">@</span>
                 {site.emails.general}
+              </a>
+              {site.phones.map((phone) => (
+                <a
+                  key={phone.href}
+                  href={phone.href}
+                  className="flex items-center gap-3 transition-colors hover:text-on-brand"
+                >
+                  <Phone aria-hidden="true" size={17} className="shrink-0 text-accent" />
+                  {phone.display}
+                </a>
+              ))}
+              <a
+                href={site.sol.socials.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 transition-colors hover:text-on-brand"
+              >
+                <InstagramIcon aria-hidden="true" size={17} className="shrink-0 text-accent" />
+                {site.sol.socials.instagram.handle}
               </a>
               <p className="italic-accent mt-4 text-xl text-on-brand/70">
                 {site.sol.relation}

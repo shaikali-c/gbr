@@ -57,10 +57,33 @@ export function SolFooter() {
               {site.emails.general}
             </a>
             <a
+              href={`mailto:${site.emails.director}`}
+              className="transition-colors hover:text-on-brand"
+            >
+              {site.emails.director}
+            </a>
+            <a
               href={`mailto:${site.emails.office}`}
               className="transition-colors hover:text-on-brand"
             >
               {site.emails.office}
+            </a>
+            {site.phones.map((phone) => (
+              <a
+                key={phone.href}
+                href={phone.href}
+                className="transition-colors hover:text-on-brand"
+              >
+                {phone.display}
+              </a>
+            ))}
+            <a
+              href={site.sol.socials.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-on-brand"
+            >
+              {site.sol.socials.instagram.handle}
             </a>
           </div>
         </div>

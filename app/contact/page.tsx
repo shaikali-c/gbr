@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { InstagramIcon } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -28,10 +29,34 @@ const contactRows = [
     icon: Mail,
   },
   {
+    label: "Director",
+    value: site.emails.director,
+    href: `mailto:${site.emails.director}`,
+    icon: Mail,
+  },
+  {
     label: "Management / office",
     value: site.emails.office,
     href: `mailto:${site.emails.office}`,
     icon: Mail,
+  },
+  ...site.phones.map((phone) => ({
+    label: `Phone — ${phone.label.toLowerCase()}`,
+    value: phone.display,
+    href: phone.href,
+    icon: Phone,
+  })),
+  {
+    label: "Instagram — GBR",
+    value: site.socials.instagram.handle,
+    href: site.socials.instagram.url,
+    icon: InstagramIcon,
+  },
+  {
+    label: "Instagram — SOL Café",
+    value: site.sol.socials.instagram.handle,
+    href: site.sol.socials.instagram.url,
+    icon: InstagramIcon,
   },
   {
     label: "Location",
@@ -93,6 +118,14 @@ export default async function ContactPage({
                         {row.href ? (
                           <a
                             href={row.href}
+                            target={
+                              row.href.startsWith("http") ? "_blank" : undefined
+                            }
+                            rel={
+                              row.href.startsWith("http")
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
                             className="font-display text-lg tracking-tight underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
                           >
                             {row.value}

@@ -34,6 +34,8 @@ const organizationJsonLd = {
   alternateName: site.shortName,
   url: site.domain,
   email: site.emails.general,
+  telephone: site.phones[0].href.replace("tel:", ""),
+  sameAs: [site.socials.instagram.url, site.sol.socials.instagram.url],
   slogan: site.tagline,
   areaServed: {
     "@type": "Place",

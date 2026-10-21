@@ -5,12 +5,12 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { aboutOfferings } from "@/content/gbr";
+import { aboutOfferings, founderStory } from "@/content/gbr";
 
 export const metadata: Metadata = {
   title: "About GBR",
   description:
-    "Gundu Babu Ruchulu is a Food & Beverage company building thoughtful food experiences across corporate meals, food services, cloud kitchens and cafés.",
+    "Gundu Babu Ruchulu is a Food & Beverage company building thoughtful food experiences across corporate meals, food services, cloud kitchens and cafés. The name comes from Srini — Gundu Babu — whose identity and dream inspire the company.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Gundu Babu Ruchulu",
@@ -87,6 +87,47 @@ export default function AboutPage() {
                 experiences that work for the people on the other side of the
                 table.
               </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Founder story */}
+        <section className="border-b border-line">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-12 md:gap-16 md:py-28 lg:px-8">
+            <div className="md:col-span-4">
+              <p className="eyebrow">{founderStory.eyebrow}</p>
+              <h2 className="mt-4 max-w-[13ch] font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+                {founderStory.title}
+              </h2>
+              <div className="mt-8 flex items-center gap-4">
+                <span
+                  aria-hidden="true"
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-accent/40 font-display text-xl text-brand"
+                >
+                  S
+                </span>
+                <p className="max-w-[20ch] text-sm leading-relaxed text-muted">
+                  Srini — the Gundu Babu behind our name.
+                </p>
+              </div>
+            </div>
+
+            <Reveal className="md:col-span-8">
+              <div className="border-l-2 border-accent pl-6 sm:pl-8">
+                {founderStory.paragraphs.map((paragraph, index) => (
+                  <p
+                    key={paragraph}
+                    className={`max-w-[62ch] text-base leading-relaxed text-muted md:text-lg${
+                      index > 0 ? " mt-6" : ""
+                    }`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+                <p className="italic-accent mt-8 max-w-[32ch] text-2xl leading-snug tracking-tight text-brand sm:text-3xl">
+                  {founderStory.closing}
+                </p>
+              </div>
             </Reveal>
           </div>
         </section>

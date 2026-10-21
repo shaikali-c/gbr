@@ -14,12 +14,33 @@ export const site = {
   location: "Hyderabad, Telangana, India",
   emails: {
     general: "info@gundubaburuchulu.com",
+    director: "director@gundubaburuchulu.com",
     office: "office@gundubaburuchulu.com",
+  },
+  phones: [
+    { label: "Primary", display: "+91 72076 78950", href: "tel:+917207678950" },
+    {
+      label: "Alternate",
+      display: "+91 72076 78951",
+      href: "tel:+917207678951",
+    },
+  ],
+  socials: {
+    instagram: {
+      handle: "@gundubaburuchulu",
+      url: "https://instagram.com/gundubaburuchulu",
+    },
   },
   sol: {
     name: "SOL Café",
     relation: "SOL Café is a venture of Gundu Babu Ruchulu.",
     location: "Prestige Tranquil, Kokapet, Hyderabad",
+    socials: {
+      instagram: {
+        handle: "@solcafe.in",
+        url: "https://instagram.com/solcafe.in",
+      },
+    },
   },
 } as const;
 

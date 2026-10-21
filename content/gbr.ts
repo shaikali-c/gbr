@@ -78,6 +78,25 @@ export const aboutOfferings: readonly Offering[] = [
   },
 ];
 
+export type FounderStory = {
+  eyebrow: string;
+  title: string;
+  paragraphs: readonly string[];
+  closing: string;
+};
+
+/** The story behind the name, shared by the family. */
+export const founderStory: FounderStory = {
+  eyebrow: "The name behind GBR",
+  title: "Gundu Babu is not just a name.",
+  paragraphs: [
+    "It is an identity, a dream and the passion behind this entrepreneurial journey. The name belongs to Srini — Gundu Babu to the people who know and love him.",
+    "When it is real, own your real identity. Be proud of who you are, and turn what the world calls your negatives into your greatest strengths. That is exactly what Srini did. His dimples. His gundu — the bald look. Instead of hiding them, he made them his signature. His superpowers.",
+    "Behind the strength of three women stands one quiet hero, cheering us on every step of the way. Today, his daughter is bringing that dream to life under his guidance — and that makes this story even more special.",
+  ],
+  closing: "Here's to owning who you are, Srini.",
+};
+
 export const corporateServices: readonly string[] = [
   "Employee meal programs",
   "Corporate lunches",

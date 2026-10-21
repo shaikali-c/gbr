@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { InstagramIcon } from "@/components/icons";
 import { nav, site } from "@/content/site";
 
 /**
@@ -54,11 +55,37 @@ export function SiteFooter() {
               {site.emails.general}
             </a>
             <a
+              href={`mailto:${site.emails.director}`}
+              className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
+            >
+              <Mail aria-hidden="true" size={15} className="shrink-0" />
+              {site.emails.director}
+            </a>
+            <a
               href={`mailto:${site.emails.office}`}
               className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
             >
               <Mail aria-hidden="true" size={15} className="shrink-0" />
               {site.emails.office}
+            </a>
+            {site.phones.map((phone) => (
+              <a
+                key={phone.href}
+                href={phone.href}
+                className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
+              >
+                <Phone aria-hidden="true" size={15} className="shrink-0" />
+                {phone.display}
+              </a>
+            ))}
+            <a
+              href={site.socials.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
+            >
+              <InstagramIcon aria-hidden="true" size={15} className="shrink-0" />
+              {site.socials.instagram.handle}
             </a>
           </div>
         </div>

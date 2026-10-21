@@ -75,7 +75,8 @@ work" process steps and cloud-kitchen expectations.
 
 ### `content/site.ts` — identity, navigation, contacts
 
-Site name, tagline, emails, location, nav items and enquiry types.
+Site name, tagline, emails, phone numbers, social links, location, nav items
+and enquiry types.
 
 ### `content/promos.ts` — promotional banners
 
